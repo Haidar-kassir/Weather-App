@@ -2,6 +2,9 @@
 const cityForm = document.querySelector('form');
 const card = document.querySelector('.card');
 const details = document.querySelector('.details');
+// select the <img> inside the .icon container (was '.icon.img' which selects nothing)
+const icon = document.querySelector('.icon img');
+const time = document.querySelector('.time');
 
 const updateUI = (data) => {
   
@@ -21,7 +24,13 @@ const updateUI = (data) => {
 
     // remove d-none if present — calling remove() is safe even if class isn't present
     card.classList.remove('d-none');
-   
+
+    const iconSrc = `img/icons/${weather.WeatherIcon}.svg`;
+    icon.setAttribute('src', iconSrc);
+
+    const timeSrc = weather?.IsDayTime ? 'img/day.jpg' : 'img/night.svg';
+    time.setAttribute('src', timeSrc);  
+      
 }
 
 

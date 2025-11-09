@@ -31,6 +31,8 @@ const updateUI = (data) => {
     const timeSrc = weather?.IsDayTime ? 'img/day.jpg' : 'img/night.svg';
     time.setAttribute('src', timeSrc);  
       
+    //store city in local storage
+    localStorage.setItem('city', cityDets.EnglishName);
 }
 
 
@@ -55,3 +57,9 @@ cityForm.addEventListener('submit', e => {
     .then(data => updateUI(data))
     .catch(err => console.log(err));
 });
+
+if(localStorage.getItem('city')){
+  updateCity(localStorage.getItem('city'))
+    .then(data => updateUI(data))
+    .catch(err => console.log(err));
+}

@@ -5,6 +5,8 @@ const details = document.querySelector('.details');
 // select the <img> inside the .icon container (was '.icon.img' which selects nothing)
 const icon = document.querySelector('.icon img');
 const time = document.querySelector('.time');
+const forcast = new Forcast();
+
 
 const updateUI = (data) => {
   
@@ -36,13 +38,7 @@ const updateUI = (data) => {
 }
 
 
-const updateCity = async (city) => {
 
-  const cityDets = await getcitydetails(city);
-  const weather = await getforcast(cityDets.Key);
-  return { cityDets, weather };
-
-};
 
 cityForm.addEventListener('submit', e => {
   // prevent default action
@@ -53,13 +49,13 @@ cityForm.addEventListener('submit', e => {
   cityForm.reset();
 
   // update the ui with new city
-  updateCity(city)
+  forcast.updateCity(city)
     .then(data => updateUI(data))
     .catch(err => console.log(err));
 });
 
 if(localStorage.getItem('city')){
-  updateCity(localStorage.getItem('city'))
+  forcast.updateCity(localStorage.getItem('city'))
     .then(data => updateUI(data))
     .catch(err => console.log(err));
 }
